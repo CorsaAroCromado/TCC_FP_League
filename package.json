@@ -1,0 +1,11 @@
+{
+  "name": "tcc_fp_league",
+  "version": "1.0.0",
+  "description": "TCC 3°DS FP_League",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Bruno Henrique Pires Maia, Diego Cubas Pereira, Gustavo Bernardini de Lima, Matheus Oliveira Nascimento, Rafael da Costa Santos",
+  "license": "MIT"
+}
