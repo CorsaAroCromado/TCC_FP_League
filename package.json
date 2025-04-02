@@ -7,5 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Bruno Henrique Pires Maia, Diego Cubas Pereira, Gustavo Bernardini de Lima, Matheus Oliveira Nascimento, Rafael da Costa Santos",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "node": "^23.11.0"
+  }
 }
