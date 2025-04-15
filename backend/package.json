@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-  "dev": "ts-node-dev src/index.ts"
+  "dev": "ts-node-dev src/index.ts",
+  "db_start": "docker-compose up -d && sleep 5 && docker exec -it meu_postgres psql -U user -d meu_banco"
   },
   "keywords": [],
   "author": "",
