@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-  "dev": "ts-node-dev src/index.ts",
-  "db_start": "docker-compose up -d && sleep 5 && docker exec -it meu_postgres psql -U user -d meu_banco"
+  "dev": "mv .env_ex .env && npm install && ts-node-dev src/index.ts",
+  "db_start": "docker-compose up -d && sleep 5 && docker exec meu_postgres psql -U user -d meu_banco -c 'SELECT * FROM pessoas;'",
+  "all": "npm run db_start && npm run dev"
   },
   "keywords": [],
   "author": "",
