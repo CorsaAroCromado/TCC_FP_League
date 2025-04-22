@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-  "dev": "mv .env_ex .env && npm install && ts-node-dev src/index.ts",
-  "db_start": "docker-compose up -d && sleep 5 && docker exec meu_postgres psql -U user -d meu_banco -c 'SELECT * FROM pessoas;'",
-  "all": "npm run db_start && npm run dev"
+  "dev": "npm install && ts-node-dev src/index.ts",
+  "db_start": "docker-compose up -d && sleep 5 && docker exec meu_postgres psql -U user -d meu_banco -c 'SELECT * FROM Evento;'",
+  "all": "npm run db_start && npm run dev",
+  "stop": "docker stop meu_postgres && docker rm meu_postgres"
   },
   "keywords": [],
   "author": "",
