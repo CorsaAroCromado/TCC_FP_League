@@ -3,21 +3,23 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-  "dev": "npm install && ts-node-dev src/index.ts",
-  "db_start": "docker-compose up -d && sleep 5 && docker exec meu_postgres psql -U user -d meu_banco -c 'SELECT * FROM Evento;'",
-  "all": "npm run db_start && npm run dev",
-  "stop": "docker stop meu_postgres && docker rm meu_postgres"
+    "dev": "npm install && ts-node-dev src/index.ts",
+    "db_start": "docker-compose up -d && sleep 5 && docker exec meu_postgres psql -U user -d meu_banco -c 'SELECT * FROM Evento;'",
+    "all": "npm run db_start && npm run dev",
+    "stop": "docker stop meu_postgres && docker rm meu_postgres"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "pg": "^8.14.1"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.17",
     "@types/express": "^5.0.1",
     "@types/node": "^22.14.0",
     "@types/pg": "^8.11.11",
