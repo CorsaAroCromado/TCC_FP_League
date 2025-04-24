@@ -14,6 +14,7 @@ export async function getClient(): Promise<PoolClient> {
   const client = await pool.connect();
   console.log("Criou a pool de conexão");
   const res = await client.query("SELECT now()");
+  console.log("NÃO ESQUEÇA DE ABRIR A PORTA 3000 PÚBLICA");
   console.log(res.rows[0]);
   client.release();
 })();
