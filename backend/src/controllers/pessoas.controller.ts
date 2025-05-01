@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { getClient } from "../config/database";
-import { Pessoa } from "../models/pessoa.model";
+import { Pessoa } from "../types/pessoa.model";
 
 export async function selectPessoas(_req: Request, res: Response) {
   try {

@@ -1,5 +1,14 @@
--- Script para que dropa as tabelas quando criar o Postgresql
-DROP TABLE IF EXISTS Resultado, Partidas, Jogador_Times, Jogadores, Times, Modalidade, Evento CASCADE;
+DROP TABLE IF EXISTS Resultado, Partidas, Jogador_Times, Jogadores, Times, Modalidade, Evento, Usuarios CASCADE;
+
+-- Tabela: Usuarios
+CREATE TABLE Usuarios (
+    id_usuario SERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    rm VARCHAR(20) UNIQUE,
+    senha VARCHAR(255) NOT NULL,
+    tipo_usuario VARCHAR(20) NOT NULL CHECK (tipo_usuario IN ('admin', 'capitao')),
+    data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 
 -- Tabela: Evento
 CREATE TABLE Evento (
@@ -25,8 +34,11 @@ CREATE TABLE Times (
     id_time SERIAL PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     id_modalidade INT NOT NULL,
-    FOREIGN KEY (id_modalidade) REFERENCES Modalidade(id_modalidade) ON DELETE CASCADE
+    id_capitao INT,
+    FOREIGN KEY (id_modalidade) REFERENCES Modalidade(id_modalidade) ON DELETE CASCADE,
+    FOREIGN KEY (id_capitao) REFERENCES Usuarios(id_usuario) ON DELETE SET NULL
 );
+
 
 -- Tabela: Jogadores
 CREATE TABLE Jogadores (
@@ -69,3 +81,16 @@ CREATE TABLE Resultado (
     FOREIGN KEY (id_partida) REFERENCES Partidas(id_partida),
     FOREIGN KEY (vencedor) REFERENCES Times(id_time)
 );
+
+--Sistema de Usuários
+
+--Tabela: Usuarios
+CREATE TABLE usuarios (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    rm VARCHAR(20) UNIQUE,
+    senha VARCHAR(255) NOT NULL,
+    tipo_usuario VARCHAR(20) NOT NULL,  -- 'admin', 'comum', etc.
+    data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
