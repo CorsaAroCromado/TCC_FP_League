@@ -9,7 +9,7 @@ import partidasRoutes from "./routes/partidas.routes";
 import eventosRoutes from "./routes/eventos.routes";
 import timesRoutes from "./routes/times.routes";
 import modalidadeRoutes from "./routes/modalidade.routes";
-
+import userRoutes from "./routes/user.routes"; // Ajuste o caminho conforme necessário
 const app = express();
 const port = process.env.PORT || "3000";
 
@@ -20,6 +20,7 @@ app.use(cors({
 
 app.use(express.json());
 
+app.use("/users", userRoutes); // Usando as rotas de usuário
 app.use("/pessoas", pessoasRoutes);
 app.use("/evento", partidasRoutes);     
 app.use("/eventos", eventosRoutes);
