@@ -3,7 +3,6 @@ dotenv.config();
 
 import express from "express";
 import cors from 'cors';
-
 import pessoasRoutes from "./routes/pessoas.routes";
 import partidasRoutes from "./routes/partidas.routes";
 import eventosRoutes from "./routes/eventos.routes";
@@ -20,14 +19,15 @@ app.use(cors({
 
 app.use(express.json());
 
-app.use("/users", userRoutes); // Usando as rotas de usuário
+
+app.use("/users", userRoutes); 
 app.use("/pessoas", pessoasRoutes);
 app.use("/evento", partidasRoutes);     
 app.use("/eventos", eventosRoutes);
 app.use("/times", timesRoutes);
 app.use("/modalidade", modalidadeRoutes); 
 
-// Rota simples de teste
+
 app.get("/", (_req, res) => {
   res.json({ message: "API está rodando" });
 });

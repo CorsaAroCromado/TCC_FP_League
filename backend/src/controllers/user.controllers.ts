@@ -1,8 +1,12 @@
 import { Request, Response } from "express";
 import { getClient } from "../config/database";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+dotenv.config();
 
-export async function inserirU(req: Request, res: Response){
+
+export async function inseriruser(req: Request, res: Response){ //vai inserir o usuario no banco de dados
   try {
     const { nome, rm, senha, tipo_usuario, data_criacao } = req.body;
 
@@ -14,16 +18,16 @@ export async function inserirU(req: Request, res: Response){
     SELECT * FROM Usuarios WHERE rm = $1
     `;
     
-    // Verifica se o usuário já existe
+    
     const ExistClient = await client.query(sql1, [rm]);
     
-    // Se o usuário já existir, retorna um erro e encerra a função
+   
     if (ExistClient.rows.length > 0) {
-      client.release(); // Libera o cliente antes de retornar
+      client.release(); 
       res.status(400).json({ error: "Usuário já existe" });
     }
     else{
-    // Criptografa a senha
+    
     const hashedPassword = await bcrypt.hash(senha, 10);
   
     const sql = `
@@ -41,4 +45,55 @@ export async function inserirU(req: Request, res: Response){
     console.error("Erro ao inserir usuário:", error);
     res.status(500).json({ error: "Erro ao inserir usuário" });
   }
+}
+export async function login(req: Request, res: Response) { //vai gerar o JsonWebToken
+  try {
+    const { rm, senha } = req.body;
+    const client = await getClient();
+
+    const sql = `SELECT * FROM Usuarios WHERE rm = $1`;
+    const result = await client.query(sql, [rm]);
+
+    if (result.rows.length === 0) {
+      client.release();
+      res.status(401).json({ message: "Login ou senha incorretos" });
+      console.log("Login ou senha incorretos");
+    } else {
+      const usuario = result.rows[0];
+      const senhaCorreta = await bcrypt.compare(senha, usuario.senha);
+
+      if (!senhaCorreta) {
+        client.release();
+        res.status(401).json({ message: "Login ou senha incorretos" });
+        console.log("Login ou senha incorretos");
+      } else {
+        client.release();
+
+        const token = jwt.sign(
+          {
+            id: usuario.id_usuario,
+            tipo_usuario: usuario.tipo_usuario,
+          },
+          process.env.JWT_SECRET!,
+          { expiresIn: "1h" }
+        );
+
+        res.status(200).json({
+          message: "Login realizado com sucesso",
+          token: token,
+        });
+        console.log("Login realizado com sucesso");
+      }
+    }
+  } catch (error) {
+    console.error("Erro ao realizar login:", error);
+    res.status(500).json({ error: "Erro ao realizar login" });
+  }
+}
+
+export async function mostradados(req: Request, res: Response) { //vai mostrar os dados do usuario logado passando pelo middleware
+    res.status(200).json({
+      id: req.user.id,
+      tipo_usuario: req.user.tipo_usuario,
+    });   
 }
