@@ -18,15 +18,27 @@
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
-    "pg": "^8.14.1"
+    "pg": "^8.15.6"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
+    "@types/body-parser": "^1.19.5",
+    "@types/connect": "^3.4.38",
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.1",
+    "@types/express-serve-static-core": "^5.0.6",
+    "@types/http-errors": "^2.0.4",
     "@types/jsonwebtoken": "^9.0.9",
-    "@types/node": "^22.15.3",
-    "@types/pg": "^8.11.11",
+    "@types/mime": "^3.0.4",
+    "@types/ms": "^2.1.0",
+    "@types/node": "^22.15.12",
+    "@types/pg": "^8.12.0",
+    "@types/qs": "^6.9.18",
+    "@types/range-parser": "^1.2.7",
+    "@types/send": "^0.17.4",
+    "@types/serve-static": "^1.15.7",
+    "@types/strip-bom": "^3.0.0",
+    "@types/strip-json-comments": "^0.0.30",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.8.3"
   }
