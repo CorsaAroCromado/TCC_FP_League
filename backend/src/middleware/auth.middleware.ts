@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 
+
 dotenv.config();
 
 type JwtPayload = {
@@ -26,7 +27,7 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction) 
       id: payload.id,
       tipo_usuario: payload.tipo_usuario,
     };
-
+    
     return next();
   } catch (error) {
     res.status(403).json({ message: 'Token inválido ou expirado' });
